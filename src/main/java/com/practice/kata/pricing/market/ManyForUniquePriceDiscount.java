@@ -13,6 +13,9 @@ public class ManyForUniquePriceDiscount implements Discount {
     }
 
     public static ManyForUniquePriceDiscount of(int discountQty, Amount discountPrice) {
+        if(discountQty <= 0 || discountPrice == null) {
+            throw new RuntimeException("Invalid supply arguments");
+        }
         return new ManyForUniquePriceDiscount(discountQty, discountPrice);
     }
 
