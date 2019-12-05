@@ -1,0 +1,22 @@
+= Kata Pricing Market
+
+
+The domain problem is something seemingly simple: pricing goods at supermarkets.
+
+* Some things in supermarkets have simple prices:
+** A can of beans costs 0.65. Two cans of beans costs 1.30.
+** 1 ounce of tomatoes costs 0.20. 1 pound costs 3.2 (1 pound = 16 ounces).
+
+* Other things have more complex prices. They can have discount applied:
+** One can of beer costs 0.80. Three for 2 (so what’s the price if I buy 4, or 5?)
+** Get off 30% on the second product
+** Get back 50 from 1000 purchase
+
+The exercise is to experiment with a model that is flexible enough to deal with these (and other) pricing schemes.
+
+
+Evaluated items (mainly, but not only) will be:
+
+* The structuring and modeling of the project
+* TDD
+* The relevance of the java 8 techniques used
