@@ -1,6 +1,7 @@
 import com.practice.kata.pricing.market.Amount;
 import com.practice.kata.pricing.market.Pricing;
 import com.practice.kata.pricing.market.Product;
+import com.practice.kata.pricing.market.WeightConverter;
 import org.assertj.core.util.BigDecimalComparator;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,21 @@ public class SimplePricingTest {
         assertThat(actualAmount)
                 .usingComparatorForType(new BigDecimalComparator(), BigDecimal.class)
                 .isEqualTo(createAmount("2.60"));
+
+    }
+
+    @Test
+    public void another_simple_pricing_product_should_return_product_qty_multiply_with_product_price() {
+        // GIVEN
+        Product tomatoe = createProduct("Tomatoes", createAmount("0.20"));
+
+        // WHEN
+        Amount actualAmount = Pricing.INSTANCE.simple(tomatoe, WeightConverter.INSTANCE.toOunces(1));
+
+        // THEN
+        assertThat(actualAmount)
+                .usingComparatorForType(new BigDecimalComparator(), BigDecimal.class)
+                .isEqualToComparingFieldByFieldRecursively(createAmount("3.20"));
 
     }
 
