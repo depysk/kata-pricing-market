@@ -1,7 +1,7 @@
-import com.practice.kata.pricing.market.domain.Amount;
-import com.practice.kata.pricing.market.service.Pricing;
-import com.practice.kata.pricing.market.domain.Product;
 import com.practice.kata.pricing.market.converter.WeightConverter;
+import com.practice.kata.pricing.market.domain.Amount;
+import com.practice.kata.pricing.market.domain.Product;
+import com.practice.kata.pricing.market.service.PricingBuilder;
 import org.assertj.core.util.BigDecimalComparator;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,10 @@ public class SimplePricingTest {
         Product canOfBeans = createProduct("Can of beans", createAmount("0.65"));
 
         // WHEN
-        Amount actualAmount = Pricing.INSTANCE.simple(canOfBeans, 4);
+        Amount actualAmount = PricingBuilder.newBuilder()
+                .withProduct(canOfBeans)
+                .withQuantity(4)
+                .build();
 
         // THEN
         assertThat(actualAmount)
@@ -32,7 +35,10 @@ public class SimplePricingTest {
         Product tomatoe = createProduct("Tomatoes", createAmount("0.20"));
 
         // WHEN
-        Amount actualAmount = Pricing.INSTANCE.simple(tomatoe, WeightConverter.INSTANCE.toOunces(1));
+        Amount actualAmount = PricingBuilder.newBuilder()
+                .withProduct(tomatoe)
+                .withQuantity(WeightConverter.INSTANCE.toOunces(1))
+                .build();
 
         // THEN
         assertThat(actualAmount)
