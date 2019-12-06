@@ -120,6 +120,53 @@ public class DiscountPricingTest {
         }
     }
 
+    @Nested
+    @DisplayName("for GetBackAmountOnCertainPurchaseAmountDiscount class")
+    class ForGetBackAmountOnCertainPurchaseAmountDiscount {
+
+        private Discount get50On1000PurchaseAmount = GetBackAmountOnCertainPurchaseAmountDiscount.of(createAmount("1000"), createAmount("50"));
+
+        @Test
+        public void pricing_product_with_discount_rule_get_back_50_on_1000_purchase_amount_should_have_valid_arguments() {
+            // GIVEN // WHEN // THEN
+            assertThatThrownBy(() -> GetBackAmountOnCertainPurchaseAmountDiscount.of(createAmount("1000"), null))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessage("Invalid supply arguments");
+
+            assertThatThrownBy(() -> GetBackAmountOnCertainPurchaseAmountDiscount.of(null, createAmount("50")))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessage("Invalid supply arguments");
+        }
+
+        @Test
+        public void pricing_product_with_discount_rule_get_back_50_on_1000_purchase_amount_should_sale_a_tv_of_1100_for_1050() {
+            // GIVEN
+            Product tv = createProduct("TV", createAmount("1100"));
+
+            // WHEN
+            Amount actualAmount = Pricing.INSTANCE.withDiscount(tv, 1, get50On1000PurchaseAmount);
+
+            // THEN
+            assertThat(actualAmount)
+                    .usingComparatorForType(new BigDecimalComparator(), BigDecimal.class)
+                    .isEqualToComparingFieldByFieldRecursively(createAmount("1050"));
+        }
+
+        @Test
+        public void pricing_product_with_discount_rule_get_back_50_on_1000_purchase_amount_should_sale_2_tv_of_700_each_to_1350() {
+            // GIVEN
+            Product tv = createProduct("TV", createAmount("700"));
+
+            // WHEN
+            Amount actualAmount = Pricing.INSTANCE.withDiscount(tv, 2, get50On1000PurchaseAmount);
+
+            // THEN
+            assertThat(actualAmount)
+                    .usingComparatorForType(new BigDecimalComparator(), BigDecimal.class)
+                    .isEqualToComparingFieldByFieldRecursively(createAmount("1350"));
+        }
+    }
+
 
     /** Dummy tests data **/
     private Product createProduct(String name, Amount unitAmount) {
