@@ -73,6 +73,53 @@ public class DiscountPricingTest {
 
     }
 
+    @Nested
+    @DisplayName("for GetPercentageOffOnNthProductDiscount class")
+    class ForGetPercentageOffOnNthProductDiscount {
+
+        private Discount get30PercentOnSecondProduct = GetPercentageOffOnNthProductDiscount.of(30, 2);
+
+        @Test
+        public void pricing_product_with_discount_rule_30_on_2nd_product_should_have_valid_arguments() {
+            // GIVEN // WHEN // THEN
+            assertThatThrownBy(() -> GetPercentageOffOnNthProductDiscount.of(0, 2))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessage("Invalid supply arguments");
+
+            assertThatThrownBy(() -> GetPercentageOffOnNthProductDiscount.of(2, 0))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessage("Invalid supply arguments");
+        }
+
+        @Test
+        public void pricing_product_with_discount_rule_30_on_2nd_product_should_should_sale_3_product_for_1_dot_84() {
+            // GIVEN
+            Product beer = createProduct("Beer", createAmount("0.80"));
+
+            // WHEN
+            Amount actualAmount = Pricing.INSTANCE.withDiscount(beer, 3, get30PercentOnSecondProduct);
+
+            // THEN
+            assertThat(actualAmount)
+                    .usingComparatorForType(new BigDecimalComparator(), BigDecimal.class)
+                    .isEqualToComparingFieldByFieldRecursively(createAmount("1.84"));
+        }
+
+        @Test
+        public void pricing_product_with_discount_rule_30_on_2nd_product_should_should_sale_10_product_for_5_dot_20() {
+            // GIVEN
+            Product beer = createProduct("Beer", createAmount("0.80"));
+
+            // WHEN
+            Amount actualAmount = Pricing.INSTANCE.withDiscount(beer, 10, get30PercentOnSecondProduct);
+
+            // THEN
+            assertThat(actualAmount)
+                    .usingComparatorForType(new BigDecimalComparator(), BigDecimal.class)
+                    .isEqualToComparingFieldByFieldRecursively(createAmount("5.20"));
+        }
+    }
+
 
     /** Dummy tests data **/
     private Product createProduct(String name, Amount unitAmount) {

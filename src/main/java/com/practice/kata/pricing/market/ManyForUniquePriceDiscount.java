@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public class ManyForUniquePriceDiscount implements Discount {
 
-    private int discountQty;
-    private Amount discountPrice;
+    private final int discountQty;
+    private final Amount discountPrice;
 
     private ManyForUniquePriceDiscount(int discountQty, Amount discountPrice) {
         this.discountQty = discountQty;
