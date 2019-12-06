@@ -1,4 +1,4 @@
-import com.practice.kata.pricing.market.WeightConverter;
+import com.practice.kata.pricing.market.converter.WeightConverter;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

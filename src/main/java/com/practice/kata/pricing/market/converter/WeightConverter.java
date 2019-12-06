@@ -1,4 +1,4 @@
-package com.practice.kata.pricing.market;
+package com.practice.kata.pricing.market.converter;
 
 public enum WeightConverter {
     INSTANCE;

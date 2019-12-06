@@ -1,7 +1,7 @@
-import com.practice.kata.pricing.market.Amount;
-import com.practice.kata.pricing.market.Pricing;
-import com.practice.kata.pricing.market.Product;
-import com.practice.kata.pricing.market.WeightConverter;
+import com.practice.kata.pricing.market.domain.Amount;
+import com.practice.kata.pricing.market.service.Pricing;
+import com.practice.kata.pricing.market.domain.Product;
+import com.practice.kata.pricing.market.converter.WeightConverter;
 import org.assertj.core.util.BigDecimalComparator;
 import org.junit.jupiter.api.Test;
 

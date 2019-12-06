@@ -1,4 +1,4 @@
-package com.practice.kata.pricing.market;
+package com.practice.kata.pricing.market.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;

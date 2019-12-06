@@ -1,5 +1,5 @@
-import com.practice.kata.pricing.market.Amount;
-import com.practice.kata.pricing.market.Product;
+import com.practice.kata.pricing.market.domain.Amount;
+import com.practice.kata.pricing.market.domain.Product;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

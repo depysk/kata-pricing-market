@@ -1,4 +1,9 @@
-import com.practice.kata.pricing.market.*;
+import com.practice.kata.pricing.market.domain.Amount;
+import com.practice.kata.pricing.market.domain.Product;
+import com.practice.kata.pricing.market.service.*;
+import com.practice.kata.pricing.market.service.discount.GetBackAmountOnCertainPurchaseAmountDiscount;
+import com.practice.kata.pricing.market.service.discount.GetPercentageOffOnNthProductDiscount;
+import com.practice.kata.pricing.market.service.discount.ManyForUniquePriceDiscount;
 import org.assertj.core.util.BigDecimalComparator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
