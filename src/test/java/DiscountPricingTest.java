@@ -1,6 +1,7 @@
 import com.practice.kata.pricing.market.domain.Amount;
 import com.practice.kata.pricing.market.domain.Product;
-import com.practice.kata.pricing.market.service.*;
+import com.practice.kata.pricing.market.service.Discount;
+import com.practice.kata.pricing.market.service.PricingBuilder;
 import com.practice.kata.pricing.market.service.discount.GetBackAmountOnCertainPurchaseAmountDiscount;
 import com.practice.kata.pricing.market.service.discount.GetPercentageOffOnNthProductDiscount;
 import com.practice.kata.pricing.market.service.discount.ManyForUniquePriceDiscount;
@@ -40,7 +41,11 @@ public class DiscountPricingTest {
             Product beer = createProduct("Beer", createAmount("0.80"));
 
             // WHEN
-            Amount actualAmount = Pricing.INSTANCE.withDiscount(beer, 3, theeFor2);
+            Amount actualAmount = PricingBuilder.newBuilder()
+                    .withProduct(beer)
+                    .withQuantity(3)
+                    .withDiscount(theeFor2)
+                    .build();
 
             // THEN
             assertThat(actualAmount)
@@ -54,7 +59,11 @@ public class DiscountPricingTest {
             Product beer = createProduct("Beer", createAmount("0.80"));
 
             // WHEN
-            Amount actualAmount = Pricing.INSTANCE.withDiscount(beer, 4, theeFor2);
+            Amount actualAmount = PricingBuilder.newBuilder()
+                    .withProduct(beer)
+                    .withQuantity(4)
+                    .withDiscount(theeFor2)
+                    .build();
 
             // THEN
             assertThat(actualAmount)
@@ -68,7 +77,11 @@ public class DiscountPricingTest {
             Product beer = createProduct("Beer", createAmount("0.80"));
 
             // WHEN
-            Amount actualAmount = Pricing.INSTANCE.withDiscount(beer, 5, theeFor2);
+            Amount actualAmount = PricingBuilder.newBuilder()
+                    .withProduct(beer)
+                    .withQuantity(5)
+                    .withDiscount(theeFor2)
+                    .build();
 
             // THEN
             assertThat(actualAmount)
@@ -102,7 +115,11 @@ public class DiscountPricingTest {
             Product beer = createProduct("Beer", createAmount("0.80"));
 
             // WHEN
-            Amount actualAmount = Pricing.INSTANCE.withDiscount(beer, 3, get30PercentOnSecondProduct);
+            Amount actualAmount = PricingBuilder.newBuilder()
+                    .withProduct(beer)
+                    .withQuantity(3)
+                    .withDiscount(get30PercentOnSecondProduct)
+                    .build();
 
             // THEN
             assertThat(actualAmount)
@@ -116,7 +133,11 @@ public class DiscountPricingTest {
             Product beer = createProduct("Beer", createAmount("0.80"));
 
             // WHEN
-            Amount actualAmount = Pricing.INSTANCE.withDiscount(beer, 10, get30PercentOnSecondProduct);
+            Amount actualAmount = PricingBuilder.newBuilder()
+                    .withProduct(beer)
+                    .withQuantity(10)
+                    .withDiscount(get30PercentOnSecondProduct)
+                    .build();
 
             // THEN
             assertThat(actualAmount)
@@ -149,7 +170,11 @@ public class DiscountPricingTest {
             Product tv = createProduct("TV", createAmount("1100"));
 
             // WHEN
-            Amount actualAmount = Pricing.INSTANCE.withDiscount(tv, 1, get50On1000PurchaseAmount);
+            Amount actualAmount = PricingBuilder.newBuilder()
+                    .withProduct(tv)
+                    .withQuantity(1)
+                    .withDiscount(get50On1000PurchaseAmount)
+                    .build();
 
             // THEN
             assertThat(actualAmount)
@@ -163,7 +188,11 @@ public class DiscountPricingTest {
             Product tv = createProduct("TV", createAmount("700"));
 
             // WHEN
-            Amount actualAmount = Pricing.INSTANCE.withDiscount(tv, 2, get50On1000PurchaseAmount);
+            Amount actualAmount = PricingBuilder.newBuilder()
+                    .withProduct(tv)
+                    .withQuantity(2)
+                    .withDiscount(get50On1000PurchaseAmount)
+                    .build();
 
             // THEN
             assertThat(actualAmount)
